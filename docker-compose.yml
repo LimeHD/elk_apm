@@ -37,6 +37,7 @@ services:
     user: "0"
     working_dir: /usr/share/elasticsearch
     volumes: [
+        './elasticsearch/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml',
         'certs:/certs',
         '.:/usr/share/elasticsearch/config/certificates'
     ]
