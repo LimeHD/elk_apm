@@ -23,29 +23,8 @@ services:
       retries: 12
       test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
 
-  create_certs:
-    container_name: create_certs
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
-    command: >
-      bash -c '
-        if [[ ! -f /certs/bundle.zip ]]; then
-          bin/elasticsearch-certutil cert --silent --pem --in config/certificates/instances.yml -out /certs/bundle.zip;
-          unzip /certs/bundle.zip -d /certs;
-        fi;
-        chown -R 1000:0 /certs
-      '
-    user: "0"
-    working_dir: /usr/share/elasticsearch
-    volumes: [
-        './elasticsearch/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml',
-        'certs:/certs',
-        '.:/usr/share/elasticsearch/config/certificates'
-    ]
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
-    depends_on:
-      - create_certs
     volumes:
       - type: bind
         source: ./elasticsearch/elasticsearch.yml
