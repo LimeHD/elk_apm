@@ -8,7 +8,6 @@ services:
         source: ./apm/apm-server.yml
         target: /usr/share/apm-server/apm-server.yml
         read_only: true
-      - certs:/usr/share/elasticsearch/config/certificates
     depends_on:
       - elasticsearch
       - kibana
@@ -33,6 +32,7 @@ services:
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data
+      - ./certs:/usr/share/elasticsearch/config/certificates
     ports:
       - "9200:9200"
       - "9300:9300"
