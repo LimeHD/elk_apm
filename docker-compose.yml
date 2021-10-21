@@ -39,8 +39,6 @@ services:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
       discovery.type: single-node
-      xpack.security.enabled: true
-      xpack.security.encryptionKey: "something_at_least_32_characters"
     networks:
       - elk
 
