@@ -1,0 +1,13 @@
+apm-server:
+  host: 0.0.0.0:8200
+  secret_token: "secret_token_here"
+  auth.api_key:
+    enabled: true
+    limit: 50
+output.elasticsearch:
+  hosts: ['elasticsearch:9200']
+  username: "elastic"
+  password: "elastic"
+setup.kibana:
+  host: 'kibana:5601'
+xpack.security.enabled: true
